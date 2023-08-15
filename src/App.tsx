@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 
-const App = () => {
-  const [term, setTerm] = useState('')
+const App = (): JSX.Element => {
+  const [term, setTerm] = useState<string>('')
 
-const onInputChange = (e) => {
-  console.log(e.target.value)
+const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  setTerm(e.target.value)
 }
 
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}

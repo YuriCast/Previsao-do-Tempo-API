@@ -1,12 +1,35 @@
 import { useState, ChangeEvent } from 'react'
 
+import { optionType } from './types'
+
 const App = (): JSX.Element => {
   const [term, setTerm] = useState<string>('')
+  const [options, setOptions] = useState<[]>([])
 
-const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-  setTerm(e.target.value)
+const getSearchOptions = (value: string) => {
+  fetch(
+    `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=5&appid=${
+      process.env.REACT_APP_API_KEY
+    }`
+  )
+    .then((res) => res.json())
+    .then((data) => setOptions(data))
 }
 
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.trim()
+    setTerm(value)
+
+    if (value === '') return
+
+    getSearchOptions(value)
+}
+
+  const onOptionSelect = (option : optionType) => {
+    console.log(option.name)
+
+    
+  }
 // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
 
   return (
@@ -21,13 +44,24 @@ const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
       Digite o local do qual você deseja saber o clima e selecione uma opção no menu
       </p>
 
-      <div className="flex mt-10 md:mt-4">
+      <div className="relative flex mt-10 md:mt-4">
         <input 
           type="text" 
           value={term}
           className="px-2 py-1 rounded-1md border-2 border-white"
           onChange={onInputChange}
         />
+
+        <ul className='absolute top-9 bg-white ml-1 rounded-b-md'>
+          {options.map((option: optionType, index : number) => (
+            <li key={option.name + '-' + index}>
+              <button className='text-left text-sm w-full hover:bg-zinc-700 hover:text-white px-2 py-1 cursor-pointer'
+              onClick={() => onOptionSelect(option)}>
+                {option.name}
+              </button>
+            </li>
+          ))}
+        </ul>
 
         <button className="rounded-r-md border-2 border-zinc-100 hover:border-zinc-500 hover:text-zinc-500 text-zinc-100 px-2 py-1 cursor-pointer">
           procurar

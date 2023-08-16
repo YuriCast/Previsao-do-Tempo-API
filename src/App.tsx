@@ -1,5 +1,7 @@
 import Search from './components/Search'
 import useForecast from './hooks/useForecast'
+import Forecast from './components/Forecast'
+
 
 const App = (): JSX.Element => {
   const {
@@ -10,11 +12,11 @@ const App = (): JSX.Element => {
     onOptionSelect,
     onSubmit
   } = useForecast()
-  
+
   return (
   <main className="flex justify-center items-center bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400 h-[100vh] w-full">
     {forecast ? (
-      'we have a forecast'
+      <Forecast data = {forecast} />
     ) : (
     <Search 
       term={term}

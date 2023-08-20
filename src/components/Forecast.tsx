@@ -33,7 +33,7 @@ const Forecast = ({ data } : Props ) : JSX.Element => {
                         {today.weather[0].main} {today.weather[0].description}
                     </p>
                     <p className="text-sm">
-                        H : <Degree temp={Math.ceil(today.main.temp_max)} /> L : { '' }
+                        Max : <Degree temp={Math.ceil(today.main.temp_max)} /> Min : { '' }
                         <Degree temp={Math.floor(today.main.temp_min)}/>
                     </p>
                 </section>
@@ -74,28 +74,28 @@ const Forecast = ({ data } : Props ) : JSX.Element => {
                     {/* wind */}
                     <Tile 
                     icon="wind" 
-                    title="Wind" 
+                    title="Vento" 
                     info={`${Math.round(today.wind.speed)} km/h`} 
                     />
 
                     {/* feels like */}
                     <Tile 
                     icon="feels"
-                    title="Feels like"
+                    title="Termossensação"
                     info={<Degree temp={Math.round(today.main.feels_like)}/>} 
                     />
 
                     {/* humidity */}
                     <Tile 
                     icon="humidity"
-                    title="Humidity"
+                    title="Humidade"
                     info={`${today.main.humidity} %`}
                     />
 
                     {/* pop */}
                     <Tile 
                     icon="pop"
-                    title="Precipitation"
+                    title="Precipitação"
                     info={`${Math.round(today.pop * 100)}%`}
                     />
 

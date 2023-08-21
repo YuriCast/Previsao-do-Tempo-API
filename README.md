@@ -4,6 +4,7 @@ Este repositótio foi criado utilizando ReactJS, TypeScript e TailwindCSS. Ele t
 
 Se você não possui o nvm instalado, cole o comando a baixo em seu terminal:
 `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
+
 Depois de você possuir o nvm baixado em seu computador, use o comando `nvm i` e depois `nvm use` (para ter a versão correta do nodeJs)
 
 Depois de você verificar se possui a versão correta do node, use o comando `npm i` para instalar todas as dependências necessárias
